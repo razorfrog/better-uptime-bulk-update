@@ -13,7 +13,7 @@ Note: This may not run on GridPane with the 7G WAF setting "Block Bad Query Stri
 - API Key:    From https://betteruptime.com/
 - Page:       Defaults to 1. Increment as needed to cycle through all pages
 - Data Key:   See example API result below. Example entry: *domain_expiration*
-- Data Value: See example API result below. Example entries: *null, 1, 2, 3, 7, 14, 30, 60*)
+- Data Value: See example API result below. Example entries: *null, 1, 2, 3, 7, 14, 30, 60*
 
 
 
