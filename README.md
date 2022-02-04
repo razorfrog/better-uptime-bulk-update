@@ -4,6 +4,8 @@ Use the Better Uptime API to update monitor settings in bulk
 
 API Details: https://docs.betteruptime.com/api/monitors-api
 
+Example can be seen/run at https://code.razorfrog.com/betteruptime/
+
 This was built to disable the 14-day domain renewal reminder on 160+ monitors 
 
 Note: This may not run on GridPane with the 7G WAF setting "Block Bad Query Strings" enabled. For example "null" is blocked in the example below.
