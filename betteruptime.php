@@ -78,7 +78,7 @@ if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
 			
 			<h1>Better Uptime Bulk Updates</h1>
 			
-			<form action="https://razorfrog.com/betteruptime.php" method="GET">
+			<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="GET">
 			    <label for="name">API KEY</label>
 			    <input type="text" name="api" id="api" value="<?php echo $_GET['api'] ?>" /> 
 			    <br/>
