@@ -86,10 +86,10 @@ if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
 			    <input type="text" name="page" id="page" value="<?php echo $page ?>" />
 			    <br/>
 			    <label for="name">DATA KEY</label>
-			    <input type="text" name="key" id="key" value="<?php echo $_GET['key'] ?>" /> (domain_expiration)
+			    <input type="text" name="key" id="key" value="<?php echo $_GET['key'] ?>" /> (Example: domain_expiration)
 			    <br>
 			    <label for="name">DATA VALUE</label>
-			    <input type="text" name="value" id="valye" value="<?php echo $_GET['value'] ?>" /> (null)
+			    <input type="text" name="value" id="valye" value="<?php echo $_GET['value'] ?>" /> (Example: null, 1, 2, 3, 7, 14, 30, 60)
 			    <br>
 			    <input type="submit" name="submit" id="submit" />
 			</form>	
