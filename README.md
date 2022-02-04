@@ -6,7 +6,7 @@ API Details: https://docs.betteruptime.com/api/monitors-api
 
 This was built to disable the 14-day domain renewal reminder on 160+ monitors 
 
-Note: This will not run on GridPane with the 7G WAF setting "Block Bad Query Strings" enabled
+Note: This may not run on GridPane with the 7G WAF setting "Block Bad Query Strings" enabled. For example "null" is blocked in the example below.
 
 **Inputs**
 
