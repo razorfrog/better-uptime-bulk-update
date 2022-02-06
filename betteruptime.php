@@ -1,6 +1,12 @@
 <?php
-	
-if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
+// set page number to 1 unless a positive integer is already specified	
+$page = ( is_int((int)$_GET['page']) && (int)$_GET['page'] > 0 ) ? (int)$_GET['page'] : 1;
+
+$api = $_GET['api'];
+$key = htmlentities($_GET['key']);
+$value = htmlentities($_GET['value']);
+$debug = $_GET['debug'];
+
 
 ?>
 
@@ -39,6 +45,7 @@ if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
             font-size: 100px;
 			line-height: 110px;
 			display:table-caption;
+			margin-bottom: 40px;
 
         }
 
@@ -67,6 +74,11 @@ if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
         
         .bar {color:#81ffff;}
         
+		.tg  {border-collapse:collapse;border-spacing:0;margin-bottom: 20px;}
+		.tg td{overflow:hidden;padding: 5px 15px 5px 0px;word-break:normal;}
+		.tg th{overflow:hidden;padding:5px 0px;word-break:normal; border-bottom: 1px solid;}
+		.tg .tg-0lax{text-align:left;vertical-align:top}
+        
     </style>
     
 </head>
@@ -78,18 +90,58 @@ if ($_GET['page']){$page = $_GET['page'];} else{ $page = 1;}
 			
 			<h1>Better Uptime Bulk Updates</h1>
 			
+			<table class="tg">
+			<thead>
+			  <tr>
+			    <th class="tg-0lax">EXAMPLE QUERIES</th>
+			    <th class="tg-0lax">KEY</th>
+			    <th class="tg-0lax">VALUE</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+			    <td class="tg-0lax">Return list of monitors only</td>
+			    <td class="tg-0lax"><em>leave empty</em></td>
+			    <td class="tg-0lax"><em>leave empty</em></td>
+			  </tr>
+			  <tr>
+			    <td class="tg-0lax">Disable domain renewal monitoring</td>
+			    <td class="tg-0lax">domain_expiration</td>
+			    <td class="tg-0lax">null</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-0lax">Change to keyword monitoring</td>
+			    <td class="tg-0lax">monitor_type</td>
+			    <td class="tg-0lax">"keyword"</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-0lax">Set monitor keyword</td>
+			    <td class="tg-0lax">required_keyword</td>
+			    <td class="tg-0lax">"razorfrog"</td>
+			  </tr>
+			  <tr>
+			    <td class="tg-0lax"></td>
+			    <td class="tg-0lax"></td>
+			    <td class="tg-0lax"></td>
+			  </tr>
+			</tbody>
+			</table>
+			
 			<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="GET">
 			    <label for="name">API KEY</label>
-			    <input type="text" name="api" id="api" value="<?php echo $_GET['api'] ?>" /> 
+			    <input type="text" name="api" id="api" value="<?php echo $_GET['api']; ?>" /> 
 			    <br/>
 			    <label for="name">PAGE</label>
-			    <input type="text" name="page" id="page" value="<?php echo $page ?>" />
+			    <input type="text" name="page" id="page" value="<?php echo $page; ?>" />
 			    <br/>
 			    <label for="name">DATA KEY</label>
-			    <input type="text" name="key" id="key" value="<?php echo $_GET['key'] ?>" /> (Example: domain_expiration)
+			    <input type="text" name="key" id="key" value="<?php echo $key; ?>" />
 			    <br>
 			    <label for="name">DATA VALUE</label>
-			    <input type="text" name="value" id="valye" value="<?php echo $_GET['value'] ?>" /> (Example: null, 1, 2, 3, 7, 14, 30, 60)
+			    <input type="text" name="value" id="valye" value="<?php echo $value; ?>" />
+			    <br>
+			    <label for="name">DEBUG</label>
+			    <input type="checkbox" id="debug" name="debug" value="true" <?php if($_GET['debug']){echo 'checked';} ?> >
 			    <br>
 			    <input type="submit" name="submit" id="submit" />
 			</form>	
@@ -103,7 +155,6 @@ if ($_GET['api'] !=""){
 ///////////////////////////////////////////////////////////////////////////
 	
 	$url = "https://betteruptime.com/api/v2/monitors?page=$page";
-	$api = $_GET['api'];
 	
 	$headers = array(
 	   "Authorization: Bearer $api",
@@ -119,26 +170,39 @@ if ($_GET['api'] !=""){
 	$response = curl_exec($curl);
 	curl_close($curl);
 		
-	// DISPLAY JSON RESULT
-	//echo pretty_print($response);
+		
+	if ($debug){	
+		// DISPLAY JSON RESULT
+		echo pretty_print($response);
+	}
 	
 	// json to php array
 	$phparray = json_decode($response, true);
 	
 	// pagination data only 
-	$pages = ($phparray[pagination]);
-	$nextpage = $pages[next];	
-	$lastpage = $pages[last];
+	$pages = ($phparray['pagination']);
+	$nextpage = $pages['next'];	
+	$lastpage = $pages['last'];
 	
-	$totalpages = substr($pages[last], -1);
+	$totalpages = substr($pages['last'], -1);
 		
 	// get rid of pagination data
-	$data = ($phparray[data]);
+	$data = ($phparray['data']);
 	
 	// get monitor ids from array
 	$ids = array_map(function ($value) {
 	    return $value['id'];
 	}, $data);
+	
+	
+	
+	// get attributes 
+	$attributes = ($phparray['data']);	
+	
+	// get monitor urls from array
+	$urls = array_map(function ($urls) {
+	    return $urls['attributes']['url'];
+	}, $attributes);
 	
 	
 	// DISPLAY FULL ARRAY
@@ -148,11 +212,17 @@ if ($_GET['api'] !=""){
 	//echo "</pre>";
 	
 	if ($page <= $totalpages){
-		echo "<h2>Monitor IDS (Page $page of $totalpages)</h2><pre>";
-		print_r($ids);
+		echo "<h2>Monitors (Page $page of $totalpages)</h2><pre>";
+		//print_r($ids);
+		//print_r($urls);
 		echo "</pre>";
+		
+		foreach($urls as $url) {
+		    echo $url, '<br>';
+		}
+		
 	} else {
-		echo "<p>error: page number out of bounds</p>";
+		echo "<p>error: page number out of bounds ($page < $totalpages)</p>";
 	}
 
 ///////////////////////////////////////////////////////////////////////////
