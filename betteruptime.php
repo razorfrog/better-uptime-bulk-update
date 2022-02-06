@@ -7,143 +7,167 @@ $key = htmlentities($_GET['key']);
 $value = htmlentities($_GET['value']);
 $debug = $_GET['debug'];
 
-
 ?>
 
 <!DOCTYPE HTML>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Better Uptime Bulk Updates</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Better Uptime Bulk Updates</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 
-    <style type="text/css">
-        body {
-            font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	<style type="text/css">
+		body {
+			font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             background-color: teal;
             color: white;
-        }
+		}
 
-        .wrap {
-            width: 100%;
-            margin: 0 auto;
-        }
+		.wrap {
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		.center {
+			margin: auto;
+			width: 80%;
+			padding: 10px;
+			padding-top: 1vh;
+		}
 
-        .center {
-            margin: auto;
-            width: 80%;
-            padding: 10px;
-            padding-top: 1vh;
-        }
-
-        h1 {
-            color: white;
-            font-size: 100px;
+		h1 {
+			color: white;
+			font-size: 100px;
 			line-height: 110px;
 			display:table-caption;
 			margin-bottom: 40px;
+		}
 
-        }
+		p {
+			font-size: medium;
+			color: white;
+			font-weight: 400;
+			line-height: 12px;
+			margin-bottom: 30px;
+		}
 
-        p {
-            font-size: medium;
-            color: white;
-            font-weight: 400;
-            line-height: 12px;
-        }
+		.footer {
+			margin: 0 auto;
+			bottom: 12px;
+			font-size: 12px;
+			color: white;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+		}
+		
+		label {display: inline-block; width: 190px;}
 
-        .footer {
-            margin: 0 auto;
-            bottom: 12px;
-            font-size: 12px;
-            color: white;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-        
-        label {display: inline-block; width: 120px;}
-        
-        input[type="text"] {width: 250px;}
-        
-        .foo {color:#ffb9f6;}
-        
-        .bar {color:#81ffff;}
-        
-		.tg  {border-collapse:collapse;border-spacing:0;margin-bottom: 20px;}
+		input[type="text"] {width: 250px;}
+
+		.foo {color:#ffb9f6;}
+
+		.bar {color:#81ffff;}
+
+		.tg  {border-collapse:collapse;border-spacing:0;}
 		.tg td{overflow:hidden;padding: 5px 15px 5px 0px;word-break:normal;}
 		.tg th{overflow:hidden;padding:5px 0px;word-break:normal; border-bottom: 1px solid;}
 		.tg .tg-0lax{text-align:left;vertical-align:top}
+
+		.destroy {color:red;}
         
     </style>
     
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="center">
-            <div class="text-left">
-			
+	<div class="wrap">
+		<div class="center">
+			<div class="text-left">
+
 			<h1>Better Uptime Bulk Updates</h1>
-			
+
 			<table class="tg">
-			<thead>
-			  <tr>
-			    <th class="tg-0lax">EXAMPLE QUERIES</th>
-			    <th class="tg-0lax">KEY</th>
-			    <th class="tg-0lax">VALUE</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-			    <td class="tg-0lax">Return list of monitors only</td>
-			    <td class="tg-0lax"><em>leave empty</em></td>
-			    <td class="tg-0lax"><em>leave empty</em></td>
-			  </tr>
-			  <tr>
-			    <td class="tg-0lax">Disable domain renewal monitoring</td>
-			    <td class="tg-0lax">domain_expiration</td>
-			    <td class="tg-0lax">null</td>
-			  </tr>
-			  <tr>
-			    <td class="tg-0lax">Change to keyword monitoring</td>
-			    <td class="tg-0lax">monitor_type</td>
-			    <td class="tg-0lax">"keyword"</td>
-			  </tr>
-			  <tr>
-			    <td class="tg-0lax">Set monitor keyword</td>
-			    <td class="tg-0lax">required_keyword</td>
-			    <td class="tg-0lax">"razorfrog"</td>
-			  </tr>
-			  <tr>
-			    <td class="tg-0lax"></td>
-			    <td class="tg-0lax"></td>
-			    <td class="tg-0lax"></td>
-			  </tr>
-			</tbody>
+				<thead>
+					<tr>
+						<th class="tg-0lax">EXAMPLE QUERIES</th>
+						<th class="tg-0lax">KEY</th>
+						<th class="tg-0lax">VALUE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="tg-0lax">Return list of monitors only</td>
+						<td class="tg-0lax"><em>leave empty</em></td>
+						<td class="tg-0lax"><em>leave empty</em></td>
+					</tr>
+					<tr>
+						<td class="tg-0lax">Disable domain renewal monitoring</td>
+						<td class="tg-0lax">domain_expiration</td>
+						<td class="tg-0lax">null</td>
+					</tr>
+					<tr>
+						<td class="tg-0lax">Change to keyword monitoring</td>
+						<td class="tg-0lax">monitor_type</td>
+						<td class="tg-0lax">"keyword"</td>
+					</tr>
+					<tr>
+						<td class="tg-0lax">Set monitor keyword</td>
+						<td class="tg-0lax">required_keyword</td>
+						<td class="tg-0lax">"razorfrog"</td>
+					</tr>
+					<tr>
+						<td class="tg-0lax"></td>
+						<td class="tg-0lax"></td>
+						<td class="tg-0lax"></td>
+					</tr>
+				</tbody>
 			</table>
 			
+			<p>Form will default to page #1 (50 entries). You will need to manually increment the page number to loop through all monitors.</p>
+			
 			<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="GET">
-			    <label for="name">API KEY</label>
-			    <input type="text" name="api" id="api" value="<?php echo $_GET['api']; ?>" /> 
-			    <br/>
-			    <label for="name">PAGE</label>
-			    <input type="text" name="page" id="page" value="<?php echo $page; ?>" />
-			    <br/>
-			    <label for="name">DATA KEY</label>
-			    <input type="text" name="key" id="key" value="<?php echo $key; ?>" />
-			    <br>
-			    <label for="name">DATA VALUE</label>
-			    <input type="text" name="value" id="valye" value="<?php echo $value; ?>" />
-			    <br>
-			    <label for="name">DEBUG</label>
-			    <input type="checkbox" id="debug" name="debug" value="true" <?php if($_GET['debug']){echo 'checked';} ?> >
-			    <br>
-			    <input type="submit" name="submit" id="submit" />
+				<label for="api">API KEY</label>
+				<input type="text" name="api" id="api" value="<?php echo $_GET['api']; ?>" /> 
+				<br/>
+				
+				<label for="page">PAGE</label>
+				<input type="text" name="page" id="page" value="<?php echo $page; ?>" />
+				<br/>
+				
+				<?php if ($_GET['delete'] != true){ ?>
+				
+					<label for="key">DATA KEY</label>
+					<input type="text" name="key" id="key" value="<?php echo $key; ?>" />
+					<br>
+					
+					<label for="value">DATA VALUE</label>
+					<input type="text" name="value" id="valye" value="<?php echo $value; ?>" />
+					<br>
+					
+				<?php } ?>
+				
+				<label for="debug">SHOW JSON</label>
+				<input type="checkbox" id="debug" name="debug" value="true" <?php if($_GET['debug']==true){echo 'checked';} ?> >
+				<br>
+				
+				<label for="delete">DELETE ALL MONITORS</label>
+				<input type="checkbox" id="delete" name="delete" value="true" <?php if($_GET['delete']==true){echo 'checked';} ?> >
+				<br>
+				
+				<?php if ($_GET['delete'] == true){ ?>
+					
+					<label for="destroy" class="destroy">CONFIRM DELETE</label>
+					<input type="checkbox" id="destroy" name="destroy" value="true">
+					<br>
+				
+				<?php } ?>
+				
+				<input type="submit" name="submit" id="submit" />
 			</form>	
                    
 <?php
@@ -157,8 +181,8 @@ if ($_GET['api'] !=""){
 	$url = "https://betteruptime.com/api/v2/monitors?page=$page";
 	
 	$headers = array(
-	   "Authorization: Bearer $api",
-	   "Content-Type: application/json",
+		"Authorization: Bearer $api",
+		"Content-Type: application/json",
 	);
 	
 	$curl = curl_init();
@@ -169,8 +193,7 @@ if ($_GET['api'] !=""){
 	
 	$response = curl_exec($curl);
 	curl_close($curl);
-		
-		
+			
 	if ($debug){	
 		// DISPLAY JSON RESULT
 		echo pretty_print($response);
@@ -191,19 +214,16 @@ if ($_GET['api'] !=""){
 	
 	// get monitor ids from array
 	$ids = array_map(function ($value) {
-	    return $value['id'];
+		return $value['id'];
 	}, $data);
-	
-	
 	
 	// get attributes 
 	$attributes = ($phparray['data']);	
 	
 	// get monitor urls from array
 	$urls = array_map(function ($urls) {
-	    return $urls['attributes']['url'];
+		return $urls['attributes']['url'];
 	}, $attributes);
-	
 	
 	// DISPLAY FULL ARRAY
 	//echo "<pre>";
@@ -218,7 +238,7 @@ if ($_GET['api'] !=""){
 		echo "</pre>";
 		
 		foreach($urls as $url) {
-		    echo $url, '<br>';
+			echo $url, '<br>';
 		}
 		
 	} else {
@@ -229,7 +249,7 @@ if ($_GET['api'] !=""){
 // loop through monitors and apply action
 ///////////////////////////////////////////////////////////////////////////
 
-if ($_GET['key'] !="") {
+if (($_GET['key'] != "") && ($_GET['delete'] != true)) {
 	
 	$key = $_GET['key'];
 	$value = $_GET['value'];
@@ -239,8 +259,8 @@ if ($_GET['key'] !="") {
 		$data = '{"'.$key.'": '.$value.'}';
 		$url = "https://betteruptime.com/api/v2/monitors/$siteid";
 		$headers = array(
-		   "Authorization: Bearer $api",
-		   "Content-Type: application/json",
+			"Authorization: Bearer $api",
+			"Content-Type: application/json",
 		);
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);
@@ -259,25 +279,47 @@ if ($_GET['key'] !="") {
 
 } // end key check
 
+///////////////////////////////////////////////////////////////////////////
+// loop through monitors and delete them all 
+///////////////////////////////////////////////////////////////////////////
+
+if (($_GET['key'] == "") && ($_GET['destroy'] == true)) {
+	
+	echo "<h2 class='destroy'>DELETED PAGE $page</h2>";
+	
+	foreach ($ids as $siteid) {
+	    	  
+		$url = "https://betteruptime.com/api/v2/monitors/$siteid";
+		$headers = array(
+			"Authorization: Bearer $api",
+			"Content-Type: application/json",
+		);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+		
+		$response = curl_exec($curl);
+		curl_close($curl);
+		
+		echo "<h3>deleted ID $siteid</h3>";
+		   
+	} // end for loop
+	
+} // end key check
+
 } // end api check 
 
 ?>
             
-            
-            
-            
-            
-            
 			</div>
-       </div>
-    </div>
-    <div class="footer">Razorfrog Web Design 2022</div>
+		</div>
+	</div>
+	<div class="footer">Razorfrog Web Design 2022</div>
 </body>
 
 </html>
-
-
-
 
 <?php
 	
@@ -338,5 +380,4 @@ function pretty_print($json_data){
 	}
 	echo "</pre>";
 }
-
 ?>
