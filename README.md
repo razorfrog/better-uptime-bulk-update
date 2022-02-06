@@ -1,6 +1,6 @@
 # better-uptime-bulk-update
 
-Use the Better Uptime API to update monitor settings in bulk
+Use the Better Uptime API to update monitor settings in bulk, or delete all monitors
 
 API Details: https://docs.betteruptime.com/api/monitors-api
 
