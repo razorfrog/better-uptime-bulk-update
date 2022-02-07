@@ -51,7 +51,7 @@ $debug = $_GET['debug'];
 			font-size: medium;
 			color: white;
 			font-weight: 400;
-			line-height: 12px;
+			line-height: 24px;
 			margin-bottom: 30px;
 		}
 
