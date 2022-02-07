@@ -78,7 +78,7 @@ $debug = $_GET['debug'];
 		.tg th{overflow:hidden;padding:5px 0px;word-break:normal; border-bottom: 1px solid;}
 		.tg .tg-0lax{text-align:left;vertical-align:top}
 
-		.destroy {color:red;}
+		.destroy, .error {color:#ff6d6d;}
         
     </style>
     
@@ -202,6 +202,15 @@ if ($_GET['api'] !=""){
 	// json to php array
 	$phparray = json_decode($response, true);
 	
+	// error check
+	$errors = ($phparray['errors']);
+	
+	if ($errors){
+		echo "<p class='error'>";
+		print_r( $errors);
+		echo "</p>";		
+	} else {
+	
 	// pagination data only 
 	$pages = ($phparray['pagination']);
 	$nextpage = $pages['next'];	
@@ -309,10 +318,12 @@ if (($_GET['key'] == "") && ($_GET['destroy'] == true)) {
 	
 } // end key check
 
+} // end error check 
+
 } // end api check 
 
 ?>
-            
+           
 			</div>
 		</div>
 	</div>
