@@ -130,9 +130,9 @@ $debug = $_GET['debug'];
 			
 			<p>Form will default to page #1 (50 entries). You will need to manually increment the page number to loop through all monitors.</p>
 			
-			<form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="GET">
+			<form action="<?php echo htmlspecialchars(strtok($_SERVER['REQUEST_URI'], '?'), ENT_QUOTES); ?>" method="GET">
 				<label for="api">API KEY</label>
-				<input type="text" name="api" id="api" value="<?php echo $_GET['api']; ?>" /> 
+				<input type="text" name="api" id="api" value="<?php echo htmlspecialchars($_GET['api'] ?? '', ENT_QUOTES); ?>" /> 
 				<br/>
 				
 				<label for="page">PAGE</label>
